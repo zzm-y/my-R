@@ -1,0 +1,270 @@
+---
+title: "大作业思路"
+output: html_document
+date: "2026-05-08"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+复现思路：Rom & Conway (2018) – The Strategic Moral Self
+1. 文章基本信息
+项目	内容
+标题	The strategic moral self: Self-presentation shapes moral dilemma judgments
+作者	Sarah C. Rom, Paul Conway
+年份	2018
+期刊	Journal of Experimental Social Psychology, Volume 74, Pages 24–37
+DOI	10.1016/j.jesp.2017.08.003
+2. 研究背景与核心假设
+该研究的基础假设是：人们对道德困境的判断不仅受基本的认知与情感过程驱动，还受到复杂的社会考量（自我呈现策略）的因果影响。人们对他人会如何评价自己的道德判断具有元洞察力（meta‑insight），并会据此调整公开（而非私下）的判断以展示自己。
+
+具体研究结构
+文章共包含 7 项研究，主要分为三个部分：
+
+部分	研究编号	核心问题
+元洞察	1–3	人们能否准确预测他人会如何评价自己的道德判断？
+策略性调整	4–6	人们是否会根据情境偏好（温暖 vs 有能力）主动调整公开的判断？
+增强效应	7	策略性调整是否会改变他人对判断者较弱特质的感知？
+核心假设
+H1（元洞察）：决策者能够准确预测他人会根据他们的道德困境判断推断出特定的性格特征。
+
+H2（自我呈现）：当情境偏好某种特质时，决策者会策略性地在公开（但非私下）情境中调整道德困境判断，以展示该特质。
+
+H3（感知增强）：策略性自我呈现会增强他人对决策者较弱特质的感知。
+
+3. 获取原始材料
+3.1 获取原始文章
+通过以下链接获取原文：
+
+ScienceDirect: https://www.sciencedirect.com/science/article/pii/S0022103117302329
+
+DOI: https://doi.org/10.1016/j.jesp.2017.08.003
+
+3.2 获取补充材料
+原文的补充材料可通过期刊页面访问：
+
+在文章页面上找到 “Supplementary Materials” 或 “Supplemental data” 区域
+
+获取 Supplementary data 文件，其中应包含各研究的数据、分析脚本及实验材料
+
+直接链接：http://dx.doi.org/10.1016/j.jesp.2017.08.003
+
+3.3 注意：OSF上无现成复现数据包
+截至目前，OSF 及其他公共平台尚未提供专门为此篇文章整理的一站式复现数据包。因此，必须以期刊的补充材料作为数据分析的唯一来源，必要时参考原文中报告的数据信息进行重建。
+
+4. 选择目标研究
+由于文章共包含 7 项研究，作为课程作业，建议选择最核心的一组假设进行复现。以下是三个推荐方案：
+
+选项	涉及研究	核心问题	推荐指数
+选项一	Studies 1–3	元洞察（人们是否准确预测他人评价）	⭐⭐⭐⭐⭐ 最推荐
+选项二	Studies 4–6	策略性调整（公开 vs 私下判断的差异）	⭐⭐⭐⭐
+选项三	Study 7	感知增强效应	⭐⭐⭐
+推荐选择：复现 Studies 1–3（元洞察）的核心效应
+
+理由：
+
+数据结构和统计方法相对简单
+
+有明确的对比组（自我评分 vs 他人评价）
+
+可充分验证文章最基础的核心假设
+
+5. 研究设计理解
+5.1 关键构念
+概念	定义
+道德困境判断	参与者对经典道德困境（如电车问题）的判断（例如“允许程度”或“适当性”）
+元洞察	决策者预测他人会如何根据其判断来评价自己的温暖（warmth）和能力（competence）
+自我评分	参与者对自身温暖和能力的评价
+他人感知	观察者/评价者对决策者温暖和能力的实际评分
+5.2 典型流程
+阶段一（决策任务）：参与者完成道德困境判断任务
+
+阶段二（自我评价）：参与者预测他人的评价（元认知预测）或评价自己的特质
+
+阶段三（外部评价）：独立的观察者对决策者进行评价
+
+阶段四（对比分析）：比较自我评分、元认知预测与外部实际评价的一致性
+
+5.3 分析的因变量
+因变量	含义
+Warmth_self	自我评价的温暖分数
+Warmth_other	他人评价的温暖分数
+Warmth_prediction	预测他人会给出的温暖分数
+Competence_self	自我评价的能力分数
+Competence_other	他人评价的能力分数
+Competence_prediction	预测他人会给出的能力分数
+5.4 预期结果模式（H1）
+元洞察准确性：预测评分与实际他人评分之间存在高度正相关关系
+
+自我评分差异：预测评分与实际他人评分在不同维度上可能存在系统性偏差
+
+6. 统计检验方案
+6.1 H1 – 元洞察准确性检验
+研究目标：检验决策者是否能准确预测他人如何评价自己的温暖和能力。
+
+核心统计检验：
+
+检验类型	目的	预期结果
+相关性分析	评估元预测与实际他人评价之间的关联	温暖和能力两个维度上均应达到中等以上的显著正相关
+配对样本 t 检验	评估预测与实际评价之间是否存在系统性偏差	温暖和能力维度上可能均不存在显著差异（或存在标志性差异）
+多元回归	控制协变量后检验预测的预测效度	温暖和能力维度上，预测评分的系数应显著
+6.2 H2 – 公开 vs 私下判断的差异
+研究目标：检验自我呈现需求是否会导致人们在公开情境中调整判断。
+
+核心统计检验：
+
+检验类型	目的	实验设计	预期结果
+群组间 t 检验 / ANOVA	比较不同条件下的公共判断差异	公共 vs 私下判断＋温暖/能力情境操纵	公共判断在不同情境间显著不同；私下判断无显著差异
+配对样本 t 检验	检验同一团队内公共与私下判断的差异	参与者在不同情境下做出公共和私下判断	公共判断显著偏离基准水平
+混合模型 ANOVA	检验情境与判断类型的交互作用	情境（温暖/能力）✕ 判断类型（公共/私下）	交互作用显著
+6.3 H3 – 感知增强效应
+研究目标：检验策略性调整是否会影响他人对判断者较弱特质的评价。
+
+核心统计检验：
+
+检验类型	目的	实验设计	预期结果
+t 检验 / ANOVA	比较不同情境下他人对较弱特质的评价	温暖情境 vs 能力情境	他人对较弱特质的评分在温暖情境下提升；其他情境无显著差异
+中介分析（若数据允许）	检验情境→公共判断→他人评价的路径	情境操作变量 ➔ 公共判断 ➔ 对较弱特质的评价	间接效应显著
+6.4 多研究结果汇总（元分析）
+对于由多个小规模实验/研究组成的项目（如 Studies 1‑3），建议进行综合元分析。
+
+方法	目的
+随机效应模型元分析	综合多项研究的效应量，估计整体的元洞察准确性
+森林图	可视化各项研究的效果及总体估计
+漏斗图与异质性检验（I²）	评估发表偏倚和研究之间的异质性
+7. 数据分析步骤（通用 R 代码框架）
+7.1 加载所需包
+r
+library(tidyverse)    # 数据操纵
+library(haven)        # 读取 SPSS .sav 文件（若补充材料为该格式）
+library(psych)        # 描述统计与相关
+library(ggplot2)      # 可视化
+library(effectsize)   # 效应量
+library(meta)         # 元分析（如涉及多个小实验）
+library(apaTables)    # APA 格式表格
+7.2 导入数据
+r
+# 假设补充材料提供 Analysis Data.sav
+df <- read_sav("data/Analysis_Data.sav")
+7.3 描述统计与相关
+r
+describe(df[, c("Warmth_self", "Warmth_other", "Warmth_prediction", "Competence_self", "Competence_other", "Competence_prediction")])
+cor(df[, c("Warmth_self", "Warmth_other", "Warmth_prediction", "Competence_self", "Competence_other", "Competence_prediction")])
+7.4 H1 检验：元预测与实际他人评价的相关性
+r
+cor.test(df$Warmth_prediction, df$Warmth_other)
+cor.test(df$Competence_prediction, df$Competence_other)
+7.5 H1 检验：预测与实际评价是否存在系统性偏差（配对样本 t 检验）
+r
+t.test(df$Warmth_prediction, df$Warmth_other, paired = TRUE)
+t.test(df$Competence_prediction, df$Competence_other, paired = TRUE)
+7.6 H1 检验：自我评分与预测/他人评价的关系
+r
+cor(df$Warmth_self, df$Warmth_other)
+cor(df$Warmth_self, df$Warmth_prediction)
+7.7 可视化示例
+r
+# 相关性散点图
+ggplot(df, aes(x = Warmth_prediction, y = Warmth_other)) +
+  geom_point(alpha = .5) +
+  geom_smooth(method = "lm") +
+  labs(title = "元预测与实际温暖评价的关系",
+       x = "预测他人温暖评分", y = "实际他人温暖评分")
+8. 复现报告结构
+建议使用以下结构撰写 R Markdown 复现报告：
+
+markdown
+---
+title: "复现报告：The strategic moral self: Self-presentation shapes moral dilemma judgments"
+author: "您的姓名"
+date: "2026年5月"
+output: 
+  bookdown::html_document2:
+    toc: yes
+  bookdown::pdf_document2:
+    toc: yes
+---
+
+# 1. 摘要
+
+# 2. 引言
+
+## 2.1 理论基础
+
+## 2.2 原始研究摘要
+
+## 2.3 复现假设
+
+# 3. 方法
+
+## 3.1 数据来源
+
+## 3.2 研究设计（选择的目标研究，如 Study 1）
+
+## 3.3 参与者描述
+
+## 3.4 测量与变量
+
+## 3.5 分析计划
+
+# 4. 结果
+
+## 4.1 描述统计
+
+## 4.2 假设检验
+
+### H1：元洞察有效性
+
+### H2：自我呈现对判断的影响
+
+### H3：感知增强效应
+
+## 4.3 补充分析
+
+# 5. 讨论
+
+## 5.1 结果总结
+
+## 5.2 与原始结果一致性评估
+
+## 5.3 局限性
+
+## 5.4 结论
+
+# 6. 参考文献
+
+# 附录：完整 R 代码
+9. 评估标准
+根据 SCORE 项目的复现成功标准：
+
+标准	内容
+核心假设	能否从补充材料中获取至少一项原始研究的完整效应量？
+效应方向	预测与实际评价之间的相关系数是否显著为正（r ≈ .30–.60）？
+效应量	与原文报告的效应量是否一致（± 0.10 以内）？
+非中心效应（null effects）	自我评分与实际评价之间是否不存在显著差异？
+成功复现的判断：
+
+如果 核心效应（如元预测与实际评价的相关）在统计上显著且效应量处于原始报告的 95% CI 内 → 成功复现
+
+如果效应不显著或效应量大幅偏离 → 部分成功/未能复现
