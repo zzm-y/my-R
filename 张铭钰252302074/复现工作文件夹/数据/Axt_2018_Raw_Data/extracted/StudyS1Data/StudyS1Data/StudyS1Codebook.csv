@@ -1,0 +1,16 @@
+Name,Label,Values
+session_id,Participant Session ID,
+location,Whether study took place or in lab,
+locationnum,,"0=Lab, 1=Web"
+TooFastIAT,Percentage of trials that were too fast in theIAT,
+TooFastBIAT,Percentage of trials that were too fast in the BIATs,
+IATD,IAT score,
+BIATGood,Good-focal BIAT score,
+BIATBad,Bad-focal BIAT score,
+dem_age,Participant Age,
+dem_citizenship,Participant citizenship,"1=US, 187=US, All others = Non-US"
+dem_ethnicityomb,Participant Ethnicity,"1=Hispanic or Latino, 2=Not Hispanic or Latino, 3=Unknown"
+dem_raceomb,Participant Race,"1=American Indian/Alaskan Native, 2=East Asian, 3=South Asian, 4=Native Hawaaian, Pacific Islander, 5= Black or African, 6= White or Caucasian, 7=Other or Unknown"
+dem_sex,Participant gender,"1=Female, 2=Male, 3=TransMTF, 4=TransFTm"
+ExpPref,Explicit racial preference item,
+ATB,Attitudes Towards Blacks scale,

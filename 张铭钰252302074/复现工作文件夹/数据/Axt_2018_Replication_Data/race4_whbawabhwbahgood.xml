@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE IAT SYSTEM "https://implicit.harvard.edu/implicit/research/library/dtd/ImplicitIAT_001.dtd">
+<IAT>
+<IATName>race4_wbhaawhbbahwgood</IATName>
+
+ <KeyLabels fontsize="15" font="Arial" fontcolor="EEEEEE">
+
+    <RightKey type="word">"I" if item belongs</RightKey>
+    <LeftKey type="word">"E" for all else</LeftKey>
+  </KeyLabels>
+
+  <Categories>
+  
+    <Category color="ffff00" font="Arial" fontsize="28">
+      <CategoryNumber>0</CategoryNumber>
+      <Stimuli>
+        <CategoryName>Good Words</CategoryName>
+        <StartWords>Love Pleasant Great Wonderful</StartWords>
+        <Stimulus type="word">Love</Stimulus>
+        <Stimulus type="word">Pleasant</Stimulus>
+        <Stimulus type="word">Great</Stimulus>
+        <Stimulus type="word">Wonderful</Stimulus>
+      </Stimuli>
+      </Category>
+
+    <Category color="ffff00" font="Arial" fontsize="28">
+       <CategoryNumber>1</CategoryNumber>
+      <Stimuli>
+        <CategoryName>Bad Words</CategoryName>
+        <StartWords>Hate Unpleasant Awful Terrible</StartWords>
+		<Stimulus type="word">Hate</Stimulus>
+        <Stimulus type="word">Unpleasant</Stimulus>
+        <Stimulus type="word">Awful</Stimulus>
+        <Stimulus type="word">Terrible</Stimulus>
+</Stimuli>
+    </Category>
+
+
+
+   <Category color="FF00FF"  font="Arial" fontsize="28">
+      <CategoryNumber>2</CategoryNumber>
+      <Stimuli>
+        <CategoryName>Asian people</CategoryName>
+        <StartImage>asiansall.jpg</StartImage>
+        <Stimulus type="image">asians1.jpg</Stimulus>
+        <Stimulus type="image">asians2.jpg</Stimulus>
+        <Stimulus type="image">asians3.jpg</Stimulus>
+        <Stimulus type="image">asians4.jpg</Stimulus>
+       </Stimuli>
+    </Category>
+    
+   <Category color="FF00FF"  font="Arial" fontsize="28">
+      <CategoryNumber>3</CategoryNumber>
+      <Stimuli>
+        <CategoryName>Black people</CategoryName>
+        <StartImage>blacksall.jpg</StartImage>
+        <Stimulus type="image">blacks1.jpg</Stimulus>
+        <Stimulus type="image">blacks2.jpg</Stimulus>
+        <Stimulus type="image">blacks3.jpg</Stimulus>
+        <Stimulus type="image">blacks4.jpg</Stimulus>
+       </Stimuli>
+    </Category>
+    
+   
+    <Category color="FF00FF"  font="Arial" fontsize="28">
+      <CategoryNumber>4</CategoryNumber>
+      <Stimuli>
+        <CategoryName>Hispanic people</CategoryName>
+        <StartImage>hispanicsall.jpg</StartImage>
+        <Stimulus type="image">hispanics1.jpg</Stimulus>
+        <Stimulus type="image">hispanics2.jpg</Stimulus>
+        <Stimulus type="image">hispanics3.jpg</Stimulus>
+        <Stimulus type="image">hispanics4.jpg</Stimulus>
+       </Stimuli>
+    </Category>
+    
+     <Category color="FF00FF"  font="Arial" fontsize="28">
+      <CategoryNumber>5</CategoryNumber>
+      <Stimuli>
+        <CategoryName>White people</CategoryName>
+        <StartImage>whitesall.jpg</StartImage>
+        <Stimulus type="image">whites1.jpg</Stimulus>
+        <Stimulus type="image">whites2.jpg</Stimulus>
+        <Stimulus type="image">whites3.jpg</Stimulus>
+        <Stimulus type="image">whites4.jpg</Stimulus>
+       </Stimuli>
+    </Category>
+
+  
+</Categories>
+
+  
+
+  <Block  limitSequence="true" preInstructionsPause="500">
+    <Instructions><![CDATA[<font size="15"  color="#FFFFFF"><p align="center"><br/><u>Block 1 of 14</u><br> This is a practice block. The <b>I</b> key is used for  <font color="#FFFF00">Good</font></b> words.<br />The <b>E</b> key is used for other words.<br />Put a right finger on <b>I</b>. Put a left finger on <b>E</b>. <br /><br />Go as fast as you can. Press the <b>space bar</b> to begin.</p></font>]]></Instructions>
+    <BlockNumber>0</BlockNumber>
+    <TrialCount>16</TrialCount>
+    <BlockPairingDefinition>0,1</BlockPairingDefinition>
+  </Block>
+
+  <Block practiceTrials="4" practiceCats="5,4" fixedPracticeTrials="1,0,1,0" limitSequence="true" preInstructionsPause="500">
+    <Instructions><![CDATA[<font size="15"  color="#FFFFFF"><p align="center"><br/><u>Block 2 of 14</u><br> The <b>I</b> key is used for <b><font color="#FF00FF">White people</font> or <font color="#FFFF00">Good Words</font></b>.<br />The <b>E</b> key is used for any other images or words.<br />Put a right finger on <b>I</b>. Put a left finger on <b>E</b>. <br /><br />Go as fast as you can. Press the <b>space bar</b> to begin.</p></font>]]></Instructions>
+    <BlockNumber>1</BlockNumber>
+    <TrialCount>16</TrialCount>
+    <BlockPairingDefinition>5,4,0,1</BlockPairingDefinition>
+  </Block>
+
+  <Block practiceTrials="4" practiceCats="5,4" fixedPracticeTrials="1,0,1,0" limitSequence="true" preInstructionsPause="500">
+    <Instructions><![CDATA[<font size="15"  color="#FFFFFF"><p align="center"><br/><u>Block 3 of 14</u><br> The <b>I</b> key is used for <b><font color="#FF00FF">White people</font> or <font color="#FFFF00">Good Words</font></b>.<br />The <b>E</b> key is used for any other images or words.<br />Put a right finger on <b>I</b>. Put a left finger on <b>E</b>. <br /><br />Go as fast as you can. Press the <b>space bar</b> to begin.</p></font>]]></Instructions>
+    <BlockNumber>2</BlockNumber>
+    <TrialCount>16</TrialCount>
+    <BlockPairingDefinition>5,4,0,1</BlockPairingDefinition>
+  </Block>
+
+  <Block practiceTrials="4" practiceCats="3,2" fixedPracticeTrials="1,0,1,0" limitSequence="true" preInstructionsPause="500">
+    <Instructions><![CDATA[<font size="15"  color="#FFFFFF"><p align="center"><br/><u>Block 4 of 14</u><br>The <b>I</b> key is used for <b><font color="#FF00FF">Black people</font> or <font color="#FFFF00">Good Words</font></b>.<br />The <b>E</b>  key is used for any other images or words.<br />Put a right finger on <b>I</b>. Put a left finger on <b>E</b>. <br /><br />Go as fast as you can. Press the <b>space bar</b> to begin.</p></font>]]></Instructions>
+    <BlockNumber>3</BlockNumber>
+    <TrialCount>16</TrialCount>
+    <BlockPairingDefinition>3,2,0,1</BlockPairingDefinition>
+  </Block>
+
+
+<Block practiceTrials="4" practiceCats="4,5" fixedPracticeTrials="1,0,1,0" limitSequence="true" preInstructionsPause="500">
+    <Instructions><![CDATA[<font size="15"  color="#FFFFFF"><p align="center"><br/><u>Block 5 of 14</u><br>The <b>I</b> key is used for <b><font color="#FF00FF">Hispanic people</font> or <font color="#FFFF00">Good Words</font></b>.<br />The <b>E</b> key is used for any other images or words.<br />Put a right finger on <b>I</b>. Put a left finger on <b>E</b>. <br /><br />Go as fast as you can. Press the <b>space bar</b> to begin.</p></font>]]></Instructions>
+    <BlockNumber>4</BlockNumber>
+    <TrialCount>16</TrialCount>
+    <BlockPairingDefinition>4,5,0,1</BlockPairingDefinition>
+  </Block>
+
+
+<Block practiceTrials="4" practiceCats="2,3" fixedPracticeTrials="1,0,1,0" limitSequence="true" preInstructionsPause="500">
+    <Instructions><![CDATA[<font size="15"  color="#FFFFFF"><p align="center"><br/><u>Block 6 of 14</u><br>The <b>I</b> key is used for <b><font color="#FF00FF">Asian people</font> or <font color="#FFFF00">Good Words</font></b>.<br />The key <b>E</b> key is used for any other images or words.<br />Put a right finger on <b>I</b>. Put a left finger on <b>E</b>. <br /><br />Go as fast as you can. Press the <b>space bar</b> to begin.</p></font>]]></Instructions>
+    <BlockNumber>5</BlockNumber>
+    <TrialCount>16</TrialCount>
+    <BlockPairingDefinition>2,3,0,1</BlockPairingDefinition>
+</Block>
+
+  
+
+  <Block practiceTrials="4" practiceCats="2,4" fixedPracticeTrials="1,0,1,0" limitSequence="true" preInstructionsPause="500">
+    <Instructions><![CDATA[<font size="15"  color="#FFFFFF"><p align="center"><br/><u>Block 7 of 14</u><br> The <b>I</b> key is used for <b><font color="#FF00FF">Asian people</font> or <font color="#FFFF00">Good Words</font></b>.<br />The <b>E</b> key is used for any other images or words.<br />Put a right finger on <b>I</b>. Put a left finger on <b>E</b>. <br /><br />Go as fast as you can. Press the <b>space bar</b> to begin.</p></font>]]></Instructions>
+    <BlockNumber>6</BlockNumber>
+    <TrialCount>16</TrialCount>
+    <BlockPairingDefinition>2,4,0,1</BlockPairingDefinition>
+  </Block>
+
+  <Block practiceTrials="4" practiceCats="5,3" fixedPracticeTrials="1,0,1,0" limitSequence="true" preInstructionsPause="500">
+    <Instructions><![CDATA[<font size="15"  color="#FFFFFF"><p align="center"><br/><u>Block 8 of 14</u><br>The <b>I</b> key is used for <b><font color="#FF00FF">White people</font> or <font color="#FFFF00">Good Words</font></b>.<br />The key <b>E</b> key is used for any other images or words.<br />Put a right finger on <b>I</b>. Put a left finger on <b>E</b>. <br /><br />Go as fast as you can. Press the <b>space bar</b> to begin.</p></font>]]></Instructions>
+    <BlockNumber>7</BlockNumber>
+    <TrialCount>16</TrialCount>
+    <BlockPairingDefinition>5,3,0,1</BlockPairingDefinition>
+  </Block>
+
+<Block practiceTrials="4" practiceCats="4,2" fixedPracticeTrials="1,0,1,0" limitSequence="true" preInstructionsPause="500">
+    <Instructions><![CDATA[<font size="15"  color="#FFFFFF"><p align="center"><br/><u>Block 9 of 14</u><br>The <b>I</b> key is used for <b><font color="#FF00FF">Hispanic people</font> or <font color="#FFFF00">Good Words</font></b>.<br />The <b>E</b> key is used for any other images or words.<br />Put a right finger on <b>I</b>. Put a left finger on <b>E</b>. <br /><br />Go as fast as you can. Press the <b>space bar</b> to begin.</p></font>]]></Instructions>
+    <BlockNumber>8</BlockNumber>
+    <TrialCount>16</TrialCount>
+    <BlockPairingDefinition>4,2,0,1</BlockPairingDefinition>
+  </Block>
+
+<Block practiceTrials="4" practiceCats="3,5" fixedPracticeTrials="1,0,1,0" limitSequence="true" preInstructionsPause="500">
+    <Instructions><![CDATA[<font size="15"  color="#FFFFFF"><p align="center"><br/><u>Block 10 of 14</u><br>The <b>I</b> key is used for <b><font color="#FF00FF">Black people</font> or <font color="#FFFF00">Good Words</font></b>.<br />The <b>E</b>  key is used for any other images or words.<br />Put a right finger on <b>I</b>. Put a left finger on <b>E</b>. <br /><br />Go as fast as you can. Press the <b>space bar</b> to begin.</p></font>]]></Instructions>
+    <BlockNumber>9</BlockNumber>
+    <TrialCount>16</TrialCount>
+    <BlockPairingDefinition>3,5,0,1</BlockPairingDefinition>
+  </Block>
+
+  <Block practiceTrials="4" practiceCats="3,4" fixedPracticeTrials="1,0,1,0" limitSequence="true" preInstructionsPause="500">
+    <Instructions><![CDATA[<font size="15"  color="#FFFFFF"><p align="center"><br/><u>Block 11 of 14</u><br>The <b>I</b> key is used for <b><font color="#FF00FF">Black people</font> or <font color="#FFFF00">Good Words</font></b>.<br />The <b>E</b>  key is used for any other images or words.<br />Put a right finger on <b>I</b>. Put a left finger on <b>E</b>. <br /><br />Go as fast as you can. Press the <b>space bar</b> to begin.</p></font>]]></Instructions>
+    <BlockNumber>11</BlockNumber>
+    <TrialCount>16</TrialCount>
+    <BlockPairingDefinition>3,4,0,1</BlockPairingDefinition>
+  </Block>
+
+  
+  <Block practiceTrials="4" practiceCats="2,5" fixedPracticeTrials="1,0,1,0" limitSequence="true" preInstructionsPause="500">
+    <Instructions><![CDATA[<font size="15"  color="#FFFFFF"><p align="center"><br/><u>Block 12 of 14</u><br> The <b>I</b> key is used for <b><font color="#FF00FF">Asian people</font> or <font color="#FFFF00">Good Words</font></b>.<br />The <b>E</b> key is used for any other images or words.<br />Put a right finger on <b>I</b>. Put a left finger on <b>E</b>. <br /><br />Go as fast as you can. Press the <b>space bar</b> to begin.</p></font>]]></Instructions>
+    <BlockNumber>10</BlockNumber>
+    <TrialCount>16</TrialCount>
+    <BlockPairingDefinition>2,5,0,1</BlockPairingDefinition>
+  </Block>
+
+<Block practiceTrials="4" practiceCats="4,3" fixedPracticeTrials="1,0,1,0" limitSequence="true" preInstructionsPause="500">
+    <Instructions><![CDATA[<font size="15"  color="#FFFFFF"><p align="center"><br/><u>Block 13 of 14</u><br>The <b>I</b> key is used for <b><font color="#FF00FF">Hispanic people</font> or <font color="#FFFF00">Good Words</font></b>.<br />The key <b>E</b> key is used for any other images or words.<br />Put a right finger on <b>I</b>. Put a left finger on <b>E</b>. <br /><br />Go as fast as you can. Press the <b>space bar</b> to begin.</p></font>]]></Instructions>
+    <BlockNumber>12</BlockNumber>
+    <TrialCount>16</TrialCount>
+    <BlockPairingDefinition>4,3,0,1</BlockPairingDefinition>
+  </Block>
+
+<Block practiceTrials="4" practiceCats="5,2" fixedPracticeTrials="1,0,1,0" limitSequence="true" preInstructionsPause="500">
+    <Instructions><![CDATA[<font size="15"  color="#FFFFFF"><p align="center"><br/><u>Block 14 of 14</u><br>The <b>I</b> key is used for <b><font color="#FF00FF">White people</font> or <font color="#FFFF00">Good</font></b>.<br />The <b>E</b>  key is used for any other images or words.<br />Put a right finger on <b>I</b>. Put a left finger on <b>E</b>. <br /><br />Go as fast as you can. Press the <b>space bar</b> to begin.</p></font>]]></Instructions>
+    <BlockNumber>13</BlockNumber>
+    <TrialCount>16</TrialCount>
+    <BlockPairingDefinition>5,2,0,1</BlockPairingDefinition>
+  </Block>
+
+<Results multiConditions="true" mean="true" SD="true" D="false">
+    <Result blocks="2">wh</Result>
+    <Result blocks="3">ba </Result>
+    <Result blocks="4">hw</Result>
+    <Result blocks="5">ab</Result>
+    <Result blocks="6">ah</Result>
+    <Result blocks="7">wb</Result>
+    <Result blocks="8">ha</Result>
+    <Result blocks="9">bw</Result>
+    <Result blocks="10">bh</Result>
+    <Result blocks="11">aw</Result>
+    <Result blocks="12">hb</Result>
+    <Result blocks="13">wa</Result>
+ </Results>
+
+ <ReportBlocks>2,3,4,5,6,7,8,9,10,11,12,13</ReportBlocks>
+
+</IAT>
+
+  

@@ -1,0 +1,262 @@
+﻿
+** Selecting only US Citizens or Residents
+
+USE ALL.
+COMPUTE filter_$=(usresorcit=1).
+VARIABLE LABELS filter_$ 'usresordem=1 (FILTER)'.
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'.
+FORMATS filter_$ (f1.0).
+FILTER BY filter_$.
+EXECUTE.
+
+FREQUENCIES VARIABLES=Ethnicity Gender RaceFull
+  /ORDER=ANALYSIS.
+
+DESCRIPTIVES VARIABLES=Age
+  /STATISTICS=MEAN STDDEV MIN MAX.
+
+FREQUENCIES VARIABLES=RaceFull
+  /ORDER=ANALYSIS.
+
+** Selecting participants with less than 10% of trials as too fast
+
+USE ALL.
+COMPUTE filter_$=(usresorcit=1 & TooFast<.1).
+VARIABLE LABELS filter_$ 'usresordem=1 (FILTER)'.
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'.
+FORMATS filter_$ (f1.0).
+FILTER BY filter_$.
+EXECUTE.
+
+** Testing Black-White comparison for Black participants 
+
+USE ALL.
+COMPUTE filter_$=(usresorcit=1 & TooFast<.1 & Race="Black").
+VARIABLE LABELS filter_$ 'usresordem=1 (FILTER)'.
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'.
+FORMATS filter_$ (f1.0).
+FILTER BY filter_$.
+EXECUTE.
+
+T-TEST GROUPS=Condition('good' 'bad')
+  /MISSING=ANALYSIS
+  /VARIABLES=WhiteBlackBIAT
+  /CRITERIA=CI(.95).
+
+** Testing Hispanic-White comparison for Hispanic participants 
+
+USE ALL.
+COMPUTE filter_$=(usresorcit=1 & TooFast<.1 & Race="Hispanic").
+VARIABLE LABELS filter_$ 'usresordem=1 (FILTER)'.
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'.
+FORMATS filter_$ (f1.0).
+FILTER BY filter_$.
+EXECUTE.
+
+T-TEST GROUPS=condition('good' 'bad')
+  /MISSING=ANALYSIS
+  /VARIABLES=WhiteHispBIAT
+  /CRITERIA=CI(.95).
+
+** Testing Asian-White comparison for Asian participants 
+
+USE ALL.
+COMPUTE filter_$=(usresorcit=1 & TooFast<.1 & Race="Asian").
+VARIABLE LABELS filter_$ 'usresordem=1 (FILTER)'.
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'.
+FORMATS filter_$ (f1.0).
+FILTER BY filter_$.
+EXECUTE.
+
+T-TEST GROUPS=condition('good' 'bad')
+  /MISSING=ANALYSIS
+  /VARIABLES=WhiteAsianBIAT
+  /CRITERIA=CI(.95).
+
+** Testing Black-White, Hispanic-White, Asian-White comparisons for White participants
+
+USE ALL.
+COMPUTE filter_$=(usresorcit=1 & TooFast<.1 & Race="White").
+VARIABLE LABELS filter_$ 'usresordem=1 (FILTER)'.
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'.
+FORMATS filter_$ (f1.0).
+FILTER BY filter_$.
+EXECUTE.
+
+T-TEST GROUPS=condition('good' 'bad')
+  /MISSING=ANALYSIS
+  /VARIABLES=WhiteBlackBIAT WhiteHispBIAT WhiteAsianBIAT
+  /CRITERIA=CI(.95).
+
+** Testing for differences in explicit preferences between conditions
+
+USE ALL.
+COMPUTE filter_$=(usresorcit=1 & TooFast<.1 & Race="Black").
+VARIABLE LABELS filter_$ 'usresordem=1 (FILTER)'.
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'.
+FORMATS filter_$ (f1.0).
+FILTER BY filter_$.
+EXECUTE.
+
+T-TEST GROUPS=condition('good' 'bad')
+  /MISSING=ANALYSIS
+  /VARIABLES=WhiteBlackExp
+  /CRITERIA=CI(.95).
+
+USE ALL.
+COMPUTE filter_$=(usresorcit=1 & TooFast<.1 & Race="Hispanic").
+VARIABLE LABELS filter_$ 'usresordem=1 (FILTER)'.
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'.
+FORMATS filter_$ (f1.0).
+FILTER BY filter_$.
+EXECUTE.
+
+
+T-TEST GROUPS=condition('good' 'bad')
+  /MISSING=ANALYSIS
+  /VARIABLES=WhiteHispExp
+  /CRITERIA=CI(.95).
+
+USE ALL.
+COMPUTE filter_$=(usresorcit=1 & TooFast<.1 & Race="Asian").
+VARIABLE LABELS filter_$ 'usresordem=1 (FILTER)'.
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'.
+FORMATS filter_$ (f1.0).
+FILTER BY filter_$.
+EXECUTE.
+
+T-TEST GROUPS=condition('good' 'bad')
+  /MISSING=ANALYSIS
+  /VARIABLES=WhiteAsianExp
+  /CRITERIA=CI(.95).
+
+USE ALL.
+COMPUTE filter_$=(usresorcit=1 & TooFast<.1 & Race="White").
+VARIABLE LABELS filter_$ 'usresordem=1 (FILTER)'.
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'.
+FORMATS filter_$ (f1.0).
+FILTER BY filter_$.
+EXECUTE.
+
+T-TEST GROUPS=condition('good' 'bad')
+  /MISSING=ANALYSIS
+  /VARIABLES=WhiteBlackExp WhiteHispExp WhiteAsianExp
+  /CRITERIA=CI(.95).
+
+** Correlations across all eligible participants
+
+USE ALL.
+COMPUTE filter_$=(usresorcit=1 & TooFast<.1).
+VARIABLE LABELS filter_$ 'usresordem=1 (FILTER)'.
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'.
+FORMATS filter_$ (f1.0).
+FILTER BY filter_$.
+EXECUTE.
+
+SORT CASES  BY Condition.
+SPLIT FILE LAYERED BY Condition.
+
+CORRELATIONS
+  /VARIABLES=WhiteBlackExp WhiteBlackBIAT
+  /PRINT=TWOTAIL NOSIG
+  /MISSING=PAIRWISE.
+
+CORRELATIONS
+  /VARIABLES=WhiteHispExp WhiteHispBIAT
+  /PRINT=TWOTAIL NOSIG
+  /MISSING=PAIRWISE.
+
+CORRELATIONS
+  /VARIABLES=WhiteAsianExp WhiteAsianBIAT
+  /PRINT=TWOTAIL NOSIG
+  /MISSING=PAIRWISE.
+
+split file off.
+
+** Simultaneous linear regressions
+
+REGRESSION
+  /MISSING LISTWISE
+  /STATISTICS COEFF OUTS R ANOVA
+  /CRITERIA=PIN(.05) POUT(.10)
+  /NOORIGIN 
+  /DEPENDENT WhiteBlackExp
+  /METHOD=ENTER WhiteBlackBIAT ConditionNum CondxImpWB.
+
+REGRESSION
+  /MISSING LISTWISE
+  /STATISTICS COEFF OUTS R ANOVA
+  /CRITERIA=PIN(.05) POUT(.10)
+  /NOORIGIN 
+  /DEPENDENT WhiteHispExp
+  /METHOD=ENTER WhiteHispBIAT ConditionNum CondxImpWH.
+
+REGRESSION
+  /MISSING LISTWISE
+  /STATISTICS COEFF OUTS R ANOVA
+  /CRITERIA=PIN(.05) POUT(.10)
+  /NOORIGIN 
+  /DEPENDENT WhiteAsianExp
+  /METHOD=ENTER WhiteAsianBIAT ConditionNum CondxImpWA.
+
+** Fisher's Z calculations
+
+compute z1 = .5*ln((1+.196)/(1-.196)). 
+compute z2 = .5*ln((1+.138)/(1-.138)). 
+compute sezdiff = sqrt(1/(9730 - 3) + 1/(8740-3)). 
+compute ztest = (z1 - z2)/sezdiff. 
+COMPUTE alpha = 2*(1 - cdf.normal(abs(ztest),0,1)). 
+execute. 
+formats z1 to alpha (f10.4). 
+list. 
+
+compute z1 = .5*ln((1+.148)/(1-.148)). 
+compute z2 = .5*ln((1+.102)/(1-.102)). 
+compute sezdiff = sqrt(1/(9739 - 3) + 1/(8736-3)). 
+compute ztest = (z1 - z2)/sezdiff. 
+COMPUTE alpha = 2*(1 - cdf.normal(abs(ztest),0,1)). 
+execute. 
+formats z1 to alpha (f10.4). 
+list. 
+
+compute z1 = .5*ln((1+.121)/(1-.121)). 
+compute z2 = .5*ln((1+.128)/(1-.128)). 
+compute sezdiff = sqrt(1/(9735 - 3) + 1/(8750-3)). 
+compute ztest = (z1 - z2)/sezdiff. 
+COMPUTE alpha = 2*(1 - cdf.normal(abs(ztest),0,1)). 
+execute. 
+formats z1 to alpha (f10.4). 
+list. 
+
+** Correlations with political conservatism across all eligible participants
+
+USE ALL.
+COMPUTE filter_$=(usresorcit=1 & TooFast<.1).
+VARIABLE LABELS filter_$ 'usresorcit=1 (FILTER)'.
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'.
+FORMATS filter_$ (f1.0).
+FILTER BY filter_$.
+EXECUTE.
+
+SORT CASES  BY Condition.
+SPLIT FILE LAYERED BY Condition.
+
+CORRELATIONS
+  /VARIABLES=Pol_Soc WhiteBlackBIAT
+  /PRINT=TWOTAIL NOSIG
+  /MISSING=PAIRWISE.
+
+CORRELATIONS
+  /VARIABLES=Pol_Soc WhiteHispBIAT
+  /PRINT=TWOTAIL NOSIG
+  /MISSING=PAIRWISE.
+
+CORRELATIONS
+  /VARIABLES=Pol_Soc WhiteAsianBIAT
+  /PRINT=TWOTAIL NOSIG
+  /MISSING=PAIRWISE.
+
+split file off.
+
+
+

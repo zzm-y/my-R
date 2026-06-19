@@ -1,0 +1,320 @@
+
+FREQUENCIES VARIABLES=Gender Race
+  /ORDER=ANALYSIS.
+
+USE ALL.
+COMPUTE filter_$=(TooFast<.1).
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'.
+FORMATS filter_$ (f1.0).
+FILTER BY filter_$.
+EXECUTE.
+
+USE ALL.
+COMPUTE filter_$=(TooFast<.1 & RaceEthCategory="Black").
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'.
+FORMATS filter_$ (f1.0).
+FILTER BY filter_$.
+EXECUTE.
+
+T-TEST PAIRS=WhiteBlackBIATGood WITH WhiteBlackBIATBad (PAIRED)
+  /CRITERIA=CI(.9500)
+  /MISSING=ANALYSIS.
+
+USE ALL.
+COMPUTE filter_$=(TooFast<.1 & RaceEthCategory="Hispanic").
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'.
+FORMATS filter_$ (f1.0).
+FILTER BY filter_$.
+EXECUTE.
+
+T-TEST PAIRS=WhiteHispanicBIATGood WITH WhiteHispanicBIATBad (PAIRED)
+  /CRITERIA=CI(.9500)
+  /MISSING=ANALYSIS.
+
+USE ALL.
+COMPUTE filter_$=(TooFast<.1 & RaceEthCategory="Asian").
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'.
+FORMATS filter_$ (f1.0).
+FILTER BY filter_$.
+EXECUTE.
+
+T-TEST PAIRS=WhiteAsianBIATGood WITH WhiteAsianBIATBad (PAIRED)
+  /CRITERIA=CI(.9500)
+  /MISSING=ANALYSIS.
+
+USE ALL.
+COMPUTE filter_$=(TooFast<.1 & RaceEthCategory="White").
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'.
+FORMATS filter_$ (f1.0).
+FILTER BY filter_$.
+EXECUTE.
+
+T-TEST PAIRS=WhiteBlackBIATGood WITH WhiteBlackBIATBad (PAIRED)
+  /CRITERIA=CI(.9500)
+  /MISSING=ANALYSIS.
+
+T-TEST PAIRS=WhiteHispanicBIATGood WITH WhiteHispanicBIATBad (PAIRED)
+  /CRITERIA=CI(.9500)
+  /MISSING=ANALYSIS.
+
+T-TEST PAIRS=WhiteAsianBIATGood WITH WhiteAsianBIATBad (PAIRED)
+  /CRITERIA=CI(.9500)
+  /MISSING=ANALYSIS.
+
+**Implicit-Explicit Analyses
+** Attitude Ambivalence Tests
+
+USE ALL.
+COMPUTE filter_$=(TooFast<.1 & (RaceEthCategory="Asian" OR WhiteCondition="Asian")).
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'.
+FORMATS filter_$ (f1.0).
+FILTER BY filter_$.
+EXECUTE.
+
+CORRELATIONS
+  /VARIABLES=PrefWhitePos PrefWhiteNeg WhiteAsianBIATGood WhiteAsianBIATBad
+  /PRINT=TWOTAIL NOSIG
+  /MISSING=PAIRWISE.
+
+REGRESSION
+  /MISSING LISTWISE
+  /STATISTICS COEFF OUTS R ANOVA
+  /CRITERIA=PIN(.05) POUT(.10)
+  /NOORIGIN 
+  /DEPENDENT PrefWhitePos
+  /METHOD=ENTER WhiteAsianBIATGood WhiteAsianBIATBad.
+
+REGRESSION
+  /MISSING LISTWISE
+  /STATISTICS COEFF OUTS R ANOVA
+  /CRITERIA=PIN(.05) POUT(.10)
+  /NOORIGIN 
+  /DEPENDENT PrefWhiteNeg
+  /METHOD=ENTER WhiteAsianBIATGood WhiteAsianBIATBad.
+
+USE ALL.
+COMPUTE filter_$=(TooFast<.1 & (RaceEthCategory="Black" OR WhiteCondition="Black")).
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'.
+FORMATS filter_$ (f1.0).
+FILTER BY filter_$.
+EXECUTE.
+
+CORRELATIONS
+  /VARIABLES=PrefWhitePos PrefWhiteNeg WhiteBlackBIATGood WhiteBlackBIATBad
+  /PRINT=TWOTAIL NOSIG
+  /MISSING=PAIRWISE.
+
+REGRESSION
+  /MISSING LISTWISE
+  /STATISTICS COEFF OUTS R ANOVA
+  /CRITERIA=PIN(.05) POUT(.10)
+  /NOORIGIN 
+  /DEPENDENT PrefWhitePos
+  /METHOD=ENTER WhiteBlackBIATGood WhiteBlackBIATBad.
+
+REGRESSION
+  /MISSING LISTWISE
+  /STATISTICS COEFF OUTS R ANOVA
+  /CRITERIA=PIN(.05) POUT(.10)
+  /NOORIGIN 
+  /DEPENDENT PrefWhiteNeg
+  /METHOD=ENTER WhiteBlackBIATGood WhiteBlackBIATBad.
+
+USE ALL.
+COMPUTE filter_$=(TooFast<.1 & (RaceEthCategory="Hispanic" OR WhiteCondition="Hispanic")).
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'.
+FORMATS filter_$ (f1.0).
+FILTER BY filter_$.
+EXECUTE.
+
+CORRELATIONS
+  /VARIABLES=PrefWhitePos PrefWhiteNeg WhiteHispanicBIATGood WhiteHispanicBIATBad
+  /PRINT=TWOTAIL NOSIG
+  /MISSING=PAIRWISE.
+
+REGRESSION
+  /MISSING LISTWISE
+  /STATISTICS COEFF OUTS R ANOVA
+  /CRITERIA=PIN(.05) POUT(.10)
+  /NOORIGIN 
+  /DEPENDENT PrefWhitePos
+  /METHOD=ENTER WhiteHispanicBIATGood WhiteHispanicBIATBad.
+
+REGRESSION
+  /MISSING LISTWISE
+  /STATISTICS COEFF OUTS R ANOVA
+  /CRITERIA=PIN(.05) POUT(.10)
+  /NOORIGIN 
+  /DEPENDENT PrefWhiteNeg
+  /METHOD=ENTER WhiteHispanicBIATGood WhiteHispanicBIATBad.
+
+** Distinct Sources Tests
+
+USE ALL.
+COMPUTE filter_$=(TooFast<.1).
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'.
+FORMATS filter_$ (f1.0).
+FILTER BY filter_$.
+EXECUTE.
+
+CORRELATIONS
+  /VARIABLES=WhiteAsianExp WhiteAsianBIATGood WhiteAsianBIATBad
+  /PRINT=TWOTAIL NOSIG
+  /MISSING=PAIRWISE.
+
+CORRELATIONS
+  /VARIABLES=WhiteBlackExp WhiteBlackBIATGood WhiteBlackBIATBad
+  /PRINT=TWOTAIL NOSIG
+  /MISSING=PAIRWISE.
+
+CORRELATIONS
+  /VARIABLES=WhiteHispExp WhiteHispanicBIATGood WhiteHispanicBIATBad
+  /PRINT=TWOTAIL NOSIG
+  /MISSING=PAIRWISE.
+
+REGRESSION
+  /MISSING LISTWISE
+  /STATISTICS COEFF OUTS R ANOVA
+  /CRITERIA=PIN(.05) POUT(.10)
+  /NOORIGIN 
+  /DEPENDENT WhiteAsianExp
+  /METHOD=ENTER WhiteAsianBIATGood WhiteAsianBIATBad.
+
+REGRESSION
+  /MISSING LISTWISE
+  /STATISTICS COEFF OUTS R ANOVA
+  /CRITERIA=PIN(.05) POUT(.10)
+  /NOORIGIN 
+  /DEPENDENT WhiteHispExp
+  /METHOD=ENTER WhiteHispanicBIATGood WhiteHispanicBIATBad.
+
+REGRESSION
+  /MISSING LISTWISE
+  /STATISTICS COEFF OUTS R ANOVA
+  /CRITERIA=PIN(.05) POUT(.10)
+  /NOORIGIN 
+  /DEPENDENT WhiteBlackExp
+  /METHOD=ENTER WhiteBlackBIATGood WhiteBlackBIATBad.
+
+CORRELATIONS
+  /VARIABLES=WhiteAsianCultPref WhiteAsianBIATGood WhiteAsianBIATBad
+  /PRINT=TWOTAIL NOSIG
+  /MISSING=PAIRWISE.
+
+CORRELATIONS
+  /VARIABLES=WhiteBlackCultPref WhiteBlackBIATGood WhiteBlackBIATBad
+  /PRINT=TWOTAIL NOSIG
+  /MISSING=PAIRWISE.
+
+CORRELATIONS
+  /VARIABLES=WhiteHispCultPref WhiteHispanicBIATGood WhiteHispanicBIATBad
+  /PRINT=TWOTAIL NOSIG
+  /MISSING=PAIRWISE.
+
+REGRESSION
+  /MISSING LISTWISE
+  /STATISTICS COEFF OUTS R ANOVA
+  /CRITERIA=PIN(.05) POUT(.10)
+  /NOORIGIN 
+  /DEPENDENT WhiteAsianCultPref
+  /METHOD=ENTER WhiteAsianBIATGood WhiteAsianBIATBad.
+
+REGRESSION
+  /MISSING LISTWISE
+  /STATISTICS COEFF OUTS R ANOVA
+  /CRITERIA=PIN(.05) POUT(.10)
+  /NOORIGIN 
+  /DEPENDENT WhiteHispCultPref 
+  /METHOD=ENTER WhiteHispanicBIATGood WhiteHispanicBIATBad.
+
+REGRESSION
+  /MISSING LISTWISE
+  /STATISTICS COEFF OUTS R ANOVA
+  /CRITERIA=PIN(.05) POUT(.10)
+  /NOORIGIN 
+  /DEPENDENT WhiteBlackCultPref 
+  /METHOD=ENTER WhiteBlackBIATGood WhiteBlackBIATBad.
+
+** Recreating Table 2
+
+USE ALL.
+COMPUTE filter_$=(TooFast<.1 & RaceEthCategory~="White").
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'.
+FORMATS filter_$ (f1.0).
+FILTER BY filter_$.
+EXECUTE.
+
+SORT CASES  BY RaceEthCategory.
+SPLIT FILE LAYERED BY RaceEthCategory.
+
+DESCRIPTIVES VARIABLES=AsianNeg AsianPos BlackNeg BlackPos HispNeg HispPos WhiteNeg WhitePos 
+    AsianCulturalWarmth BlackCulturalWarmth HispCulturalWarmth WhiteCulturalWarmth WhiteAsianCultPref 
+    WhiteBlackCultPref WhiteHispCultPref WhiteAsianExp WhiteBlackExp WhiteHispExp
+  /STATISTICS=MEAN STDDEV MIN MAX.
+
+split file off.
+
+USE ALL.
+COMPUTE filter_$=(TooFast<.1 & RaceEthCategory="White").
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'.
+FORMATS filter_$ (f1.0).
+FILTER BY filter_$.
+EXECUTE.
+
+SORT CASES  BY WhiteCondition.
+SPLIT FILE LAYERED BY WhiteCondition.
+
+DESCRIPTIVES VARIABLES=AsianNeg AsianPos BlackNeg BlackPos HispNeg HispPos WhiteNeg WhitePos 
+    AsianCulturalWarmth BlackCulturalWarmth HispCulturalWarmth WhiteCulturalWarmth WhiteAsianCultPref 
+    WhiteBlackCultPref WhiteHispCultPref WhiteAsianExp WhiteBlackExp WhiteHispExp
+  /STATISTICS=MEAN STDDEV MIN MAX.
+
+** Recreating Table 3
+
+USE ALL.
+COMPUTE filter_$=(TooFast<.1 & (RaceEthCategory="Asian" OR RaceEthCategory="White")).
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'.
+FORMATS filter_$ (f1.0).
+FILTER BY filter_$.
+EXECUTE.
+
+CORRELATIONS
+  /VARIABLES=WhiteAsianBIATGood WhiteAsianBIATBad WhiteAsianExp WhiteAsianCultPref 
+    PrefWhitePos PrefWhiteNeg
+  /PRINT=TWOTAIL NOSIG
+  /MISSING=PAIRWISE.
+
+split file off.
+
+USE ALL.
+COMPUTE filter_$=(TooFast<.1 & (RaceEthCategory="Black" OR RaceEthCategory="White")).
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'.
+FORMATS filter_$ (f1.0).
+FILTER BY filter_$.
+EXECUTE.
+
+CORRELATIONS
+  /VARIABLES=WhiteBlackBIATGood WhiteBlackBIATBad WhiteBlackExp WhiteBlackCultPref 
+   PrefWhitePos PrefWhiteNeg
+  /PRINT=TWOTAIL NOSIG
+  /MISSING=PAIRWISE.
+
+split file off.
+
+USE ALL.
+COMPUTE filter_$=(TooFast<.1 & (RaceEthCategory="Hispanic" OR RaceEthCategory="White")).
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'.
+FORMATS filter_$ (f1.0).
+FILTER BY filter_$.
+EXECUTE.
+
+CORRELATIONS
+  /VARIABLES=WhiteHispanicBIATGood WhiteHispanicBIATBad WhiteHispExp WhiteHispCultPref 
+   PrefWhitePos PrefWhiteNeg
+  /PRINT=TWOTAIL NOSIG
+  /MISSING=PAIRWISE.
+
+split file off.
+
+
+

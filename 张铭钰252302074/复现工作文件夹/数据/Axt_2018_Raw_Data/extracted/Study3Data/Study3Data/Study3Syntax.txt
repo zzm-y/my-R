@@ -1,0 +1,76 @@
+
+FREQUENCIES VARIABLES=uscitorres
+  /ORDER=ANALYSIS.
+
+USE ALL.
+COMPUTE filter_$=(uscitorres=1).
+VARIABLE LABELS filter_$ 'us=1 (FILTER)'.
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'.
+FORMATS filter_$ (f1.0).
+FILTER BY filter_$.
+EXECUTE.
+
+FREQUENCIES VARIABLES= Race Gender Ethnicity
+  /ORDER=ANALYSIS.
+
+USE ALL.
+COMPUTE filter_$=(uscitorres=1 & TooFast<.1).
+VARIABLE LABELS filter_$ 'us=1 (FILTER)'.
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'.
+FORMATS filter_$ (f1.0).
+FILTER BY filter_$.
+EXECUTE.
+
+SORT CASES  BY SexualOrientationRecode.
+SPLIT FILE LAYERED BY SexualOrientationRecode.
+
+T-TEST PAIRS=StraightGayBIATGood WITH StraightGayBIATBad (PAIRED)
+  /CRITERIA=CI(.9500)
+  /MISSING=ANALYSIS.
+
+split file off.
+
+SORT CASES  BY SexualOrientationRecode.
+SPLIT FILE LAYERED BY SexualOrientationRecode.
+
+DESCRIPTIVES VARIABLES=StraightGayExp
+  /STATISTICS=MEAN STDDEV MIN MAX.
+
+T-TEST
+  /TESTVAL=0
+  /MISSING=ANALYSIS
+  /VARIABLES=StraightGayExp
+  /CRITERIA=CI(.95).
+
+DESCRIPTIVES VARIABLES=ThermDiff
+  /STATISTICS=MEAN STDDEV MIN MAX.
+
+T-TEST
+  /TESTVAL=0
+  /MISSING=ANALYSIS
+  /VARIABLES=ThermDiff
+  /CRITERIA=CI(.95).
+
+split file off.
+
+CORRELATIONS
+  /VARIABLES=StraightGayExp ThermDiff StraightGayBIATGood StraightGayBIATBad 
+  /PRINT=TWOTAIL NOSIG
+  /MISSING=PAIRWISE.
+
+REGRESSION
+  /MISSING LISTWISE
+  /STATISTICS COEFF OUTS R ANOVA
+  /CRITERIA=PIN(.05) POUT(.10)
+  /NOORIGIN 
+  /DEPENDENT StraightGayExp
+  /METHOD=ENTER StraightGayBIATGood StraightGayBIATBad.
+
+REGRESSION
+  /MISSING LISTWISE
+  /STATISTICS COEFF OUTS R ANOVA
+  /CRITERIA=PIN(.05) POUT(.10)
+  /NOORIGIN 
+  /DEPENDENT ThermDiff
+  /METHOD=ENTER StraightGayBIATGood StraightGayBIATBad.
+

@@ -1,0 +1,47 @@
+"0","good_data <- df_black %>%"
+"0","  filter(condition == ""good"") %>%"
+"0","  pull(D_score)"
+"0",""
+"0","t_one <- t.test(good_data, mu = 0, alternative = ""less"")"
+"0",""
+"0","d_one <- mean(good_data, na.rm = TRUE) / sd(good_data, na.rm = TRUE)"
+"0","n_good <- sum(!is.na(good_data))"
+"0","se_d_one <- sqrt(1 / n_good + d_one^2 / (2 * n_good))"
+"0",""
+"0","cat(""\n════════════════════════════════════\n"")"
+"1","
+════════════════════════════════════
+"
+"0","cat(""  Good 组单样本 t 检验（H₁: μ < 0）\n"")"
+"1","  Good 组单样本 t 检验（H₁: μ < 0）
+"
+"0","cat(""────────────────────────────────────\n"")"
+"1","────────────────────────────────────
+"
+"0","cat(sprintf(""  n        = %d\n"", n_good))"
+"1","  n        = 856
+"
+"0","cat(sprintf(""  Mean     = %.3f\n"", mean(good_data, na.rm = TRUE)))"
+"1","  Mean     = -0.118
+"
+"0","cat(sprintf(""  SD       = %.3f\n"", sd(good_data, na.rm = TRUE)))"
+"1","  SD       = 0.599
+"
+"0","cat(sprintf(""  t(%s)  = %.3f\n"", round(t_one$parameter, 2), t_one$statistic))"
+"1","  t(855)  = -5.787
+"
+"0","cat(sprintf(""  p        = %.4f\n"", t_one$p.value))"
+"1","  p        = 0.0000
+"
+"0","cat(""────────────────────────────────────\n"")"
+"1","────────────────────────────────────
+"
+"0","cat(sprintf(""  Cohen's d = %.3f\n"", d_one))"
+"1","  Cohen's d = -0.198
+"
+"0","cat(sprintf(""  95%% CI    [%.3f, %.3f]\n"", d_one - 1.96 * se_d_one, d_one + 1.96 * se_d_one))"
+"1","  95% CI    [-0.265, -0.130]
+"
+"0","cat(""════════════════════════════════════\n"")"
+"1","════════════════════════════════════
+"

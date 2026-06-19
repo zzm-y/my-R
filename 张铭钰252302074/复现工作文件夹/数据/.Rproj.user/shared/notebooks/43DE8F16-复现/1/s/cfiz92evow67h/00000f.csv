@@ -1,0 +1,8 @@
+"0","library(effectsize)"
+"0","d_result <- cohens_d(D_score ~ condition, data = df_black)"
+"0","d_result"
+"1","Cohen's d |       95% CI
+------------------------
+0.45      | [0.35, 0.55]
+[36m
+- Estimated using pooled SD.[39m"

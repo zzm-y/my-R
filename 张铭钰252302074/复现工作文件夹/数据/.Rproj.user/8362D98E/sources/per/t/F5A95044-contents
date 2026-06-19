@@ -1,0 +1,102 @@
+---
+title: "Axt et al. (2018) 文献复现"
+author: "Your Name"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    theme: flatly
+    highlight: tango
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, fig.align = "center")
+```
+
+## 1. 加载包
+
+```{r load-packages}
+packages <- c("tidyverse", "bruceR", "effsize", "BayesFactor",
+              "knitr", "kableExtra", "ggplot2", "patchwork", "readxl")
+
+for (pkg in packages) {
+  if (!require(pkg, character.only = TRUE)) {
+    install.packages(pkg, dependencies = TRUE)
+    library(pkg, character.only = TRUE)
+  }
+}
+```
+
+## 2. 读取全部数据
+
+数据来源：Axt et al. (2018), Journal of Experimental Social Psychology.
+
+```{r read-all-data}
+# 基础路径
+base_dir <- file.path(getwd(), "1R复现", "Axt_2018_Raw_Data", "extracted")
+
+# ---- 2.1 主研究 Study1-5 ----
+studies_main <- c("Study1", "Study2", "Study3", "Study4", "Study5")
+df_list <- list()
+
+for (s in studies_main) {
+  fp <- file.path(base_dir, paste0(s, "Data"), paste0(s, "Data"), paste0(s, "Data.csv"))
+  df_list[[s]] <- read.csv(fp, stringsAsFactors = FALSE)
+  cat(sprintf("✓ %-10s: %4d 行, %3d 列\n", s, nrow(df_list[[s]]), ncol(df_list[[s]])))
+}
+
+# ---- 2.2 补充研究 StudyS1-S8 ----
+studies_supp <- c("StudyS1", "StudyS2", "StudyS3", "StudyS4",
+                  "StudyS5", "StudyS6", "StudyS7", "StudyS8")
+
+for (s in studies_supp) {
+  folder <- file.path(base_dir, paste0(s, "Data"), paste0(s, "Data"))
+
+  if (s == "StudyS2") {
+    # StudyS2 是 Excel 格式
+    fp <- file.path(folder, "StudyS2Data.xlsx")
+    df_list[[s]] <- read_excel(fp)
+  } else {
+    fp <- file.path(folder, paste0(s, "Data.csv"))
+    df_list[[s]] <- read.csv(fp, stringsAsFactors = FALSE)
+  }
+  cat(sprintf("✓ %-10s: %4d 行, %3d 列\n", s, nrow(df_list[[s]]), ncol(df_list[[s]])))
+}
+
+# ---- 2.3 设置默认数据框为 Study1 ----
+df_raw <- df_list[["Study1"]]
+```
+
+## 3. 数据概览
+
+```{r data-overview}
+cat("========== df_raw (Study1) 前10行 ==========\n")
+head(df_raw, 10)
+
+cat("\n========== 列名 ==========\n")
+names(df_raw)
+
+cat(sprintf("\n========== 数据维度: %d 行 × %d 列 ==========\n", nrow(df_raw), ncol(df_raw)))
+
+cat("\n========== 各变量类型 ==========\n")
+glimpse(df_raw)
+```
+
+## 4. 其他研究快速查看
+
+如需查看其他研究数据，直接运行以下代码块（在 RStudio 中修改 `s_name` 即可）：
+
+```{r explore-other-studies}
+s_name <- "Study2"   # ← 可改为 Study3, StudyS1, StudyS4 等
+cat(sprintf("===== %s =====\n", s_name))
+cat(sprintf("维度: %d 行 × %d 列\n\n", nrow(df_list[[s_name]]), ncol(df_list[[s_name]])))
+cat("前6行:\n")
+head(df_list[[s_name]], 6)
+cat("\n列名:\n")
+names(df_list[[s_name]])
+```
+
+---
+
+*生成时间: `r Sys.time()`*

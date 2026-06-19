@@ -1,0 +1,14 @@
+"0","table(df_s1$usresorcit, useNA = ""ifany"")"
+"1","
+    0     1 
+ 4937 23764 
+"
+"0","summary(df_s1$TooFast)"
+"1","   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+ 0.0000  0.0000  0.0000  0.0229  0.0000  1.0000    4307 
+"
+"0","table(df_s1$Race)"
+"1","
+   Asian    Black Hispanic    Other    White 
+    1173     2207     2657     3561    19103 
+"

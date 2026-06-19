@@ -1,0 +1,46 @@
+"0","desc <- df_black %>%"
+"0","  group_by(condition) %>%"
+"0","  summarise("
+"0","    n    = sum(!is.na(D_score)),"
+"0","    mean = mean(D_score, na.rm = TRUE),"
+"0","    sd   = sd(D_score, na.rm = TRUE)"
+"0","  )"
+"0",""
+"0","t_res <- t.test(D_score ~ condition, data = df_black)"
+"0","d_res <- cohens_d(D_score ~ condition, data = df_black)"
+"0",""
+"0","cat(""══════════════════════════════════════════\n"")"
+"1","══════════════════════════════════════════
+"
+"0","cat(""         good-focal          bad-focal\n"")"
+"1","         good-focal          bad-focal
+"
+"0","cat(""──────────────────────────────────────────\n"")"
+"1","──────────────────────────────────────────
+"
+"0","cat(sprintf(""  n      %6d              %6d\n"", desc$n[1], desc$n[2]))"
+"1","  n         751                 856
+"
+"0","cat(sprintf(""  Mean   %8.3f            %8.3f\n"", desc$mean[1], desc$mean[2]))"
+"1","  Mean      0.159              -0.118
+"
+"0","cat(sprintf(""  SD     %8.3f            %8.3f\n"", desc$sd[1], desc$sd[2]))"
+"1","  SD        0.635               0.599
+"
+"0","cat(""──────────────────────────────────────────\n"")"
+"1","──────────────────────────────────────────
+"
+"0","cat(sprintf(""Welch t(%s) = %.3f, p = %.4f\n"","
+"0","    round(t_res$parameter, 2), t_res$statistic, t_res$p.value))"
+"1","Welch t(1548.82) = 8.975, p = 0.0000
+"
+"0","cat(""──────────────────────────────────────────\n"")"
+"1","──────────────────────────────────────────
+"
+"0","cat(sprintf(""Cohen's d = %.3f, 95%% CI [%.3f, %.3f]\n"","
+"0","    d_res$Cohens_d, d_res$CI_low, d_res$CI_high))"
+"1","Cohen's d = 0.450, 95% CI [0.351, 0.550]
+"
+"0","cat(""══════════════════════════════════════════\n"")"
+"1","══════════════════════════════════════════
+"

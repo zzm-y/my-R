@@ -1,0 +1,15 @@
+"0","t.test(D_score ~ condition, data = df_black, var.equal = TRUE)"
+"1","
+"
+"1","	Two Sample t-test
+
+data:  D_score by condition
+t = 21.848, df = 12508, p-value < 2.2e-16
+alternative hypothesis: true difference in means between group bad and group good is not equal to 0
+95 percent confidence interval:
+ 0.2139533 0.2561287
+sample estimates:
+ mean in group bad mean in group good 
+         0.3917669          0.1567259 
+
+"

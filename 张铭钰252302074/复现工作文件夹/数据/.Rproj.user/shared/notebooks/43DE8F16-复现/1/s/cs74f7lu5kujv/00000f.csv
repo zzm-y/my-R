@@ -1,0 +1,7 @@
+"0","# 各组的 Pearson 相关"
+"0","cor_good <- df_clean %>%"
+"0","  filter(condition == ""good"") %>%"
+"0","  summarise("
+"0","    r = cor(WhiteBlackExp, WhiteBlackBIAT, use = ""complete.obs""),"
+"0","    n = sum(!is.na(WhiteBlackExp) & !is.na(WhiteBlackBIAT))"
+"0","  )"

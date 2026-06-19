@@ -1,0 +1,85 @@
+USE ALL.
+COMPUTE filter_$=(Religion="Christian").
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'.
+FORMATS filter_$ (f1.0).
+FILTER BY filter_$.
+EXECUTE.
+
+FREQUENCIES VARIABLES=Race Gender
+  /ORDER=ANALYSIS.
+
+DESCRIPTIVES VARIABLES=Age
+  /STATISTICS=MEAN STDDEV MIN MAX.
+
+USE ALL.
+COMPUTE filter_$=(TooFast<.1 & Religion ="Christian").
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'.
+FORMATS filter_$ (f1.0).
+FILTER BY filter_$.
+EXECUTE.
+
+T-TEST GROUPS=Condition('good' 'bad')
+  /MISSING=ANALYSIS
+  /VARIABLES=ChristJewBIAT ChristIslamBIAT ChristHinduBIAT
+  /CRITERIA=CI(.95).
+
+DESCRIPTIVES VARIABLES=ChristJewExp ChristIslamExp ChristHinduExp
+  /STATISTICS=MEAN STDDEV MIN MAX.
+
+T-TEST GROUPS=condition('good' 'bad')
+  /MISSING=ANALYSIS
+  /VARIABLES=ChristJewExp ChristIslamExp ChristHinduExp
+  /CRITERIA=CI(.95).
+
+USE ALL.
+COMPUTE filter_$=(TooFast<.1).
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'.
+FORMATS filter_$ (f1.0).
+FILTER BY filter_$.
+EXECUTE.
+
+SORT CASES  BY condition.
+SPLIT FILE LAYERED BY condition.
+
+CORRELATIONS
+  /VARIABLES=ChristJewExp ChristJewBIAT
+  /PRINT=TWOTAIL NOSIG
+  /MISSING=PAIRWISE.
+
+CORRELATIONS
+  /VARIABLES=ChristHinduExp ChristHinduBIAT
+  /PRINT=TWOTAIL NOSIG
+  /MISSING=PAIRWISE.
+
+CORRELATIONS
+  /VARIABLES=ChristIslamExp ChristIslamBIAT
+  /PRINT=TWOTAIL NOSIG
+  /MISSING=PAIRWISE.
+
+split file off.
+
+REGRESSION
+  /MISSING LISTWISE
+  /STATISTICS COEFF OUTS R ANOVA
+  /CRITERIA=PIN(.05) POUT(.10)
+  /NOORIGIN 
+  /DEPENDENT ChristJewExp
+  /METHOD=ENTER ConditionNum ChristJewBIAT CondxCJBIAT.
+
+REGRESSION
+  /MISSING LISTWISE
+  /STATISTICS COEFF OUTS R ANOVA
+  /CRITERIA=PIN(.05) POUT(.10)
+  /NOORIGIN 
+  /DEPENDENT ChristHinduExp
+  /METHOD=ENTER ConditionNum ChristHinduBIAT CondxCHBIAT.
+
+REGRESSION
+  /MISSING LISTWISE
+  /STATISTICS COEFF OUTS R ANOVA
+  /CRITERIA=PIN(.05) POUT(.10)
+  /NOORIGIN 
+  /DEPENDENT ChristIslamExp
+  /METHOD=ENTER ConditionNum ChristIslamBIAT CondxCIBIAT.
+
+

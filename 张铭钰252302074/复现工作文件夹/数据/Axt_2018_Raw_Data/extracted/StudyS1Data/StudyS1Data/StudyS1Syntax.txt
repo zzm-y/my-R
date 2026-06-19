@@ -1,0 +1,54 @@
+** Selecting Eligible Participants
+
+USE ALL.
+COMPUTE filter_$=(TooFastIAT<.1 & TooFastBIAT<.1).
+VALUE LABELS filter_$ 0 'Not Selected' 1 'Selected'.
+FORMATS filter_$ (f1.0).
+FILTER BY filter_$.
+EXECUTE.
+
+*** Descriptives for main variables
+
+DESCRIPTIVES VARIABLES=IATD BIATGood BIATBad ExpPref ATB
+  /STATISTICS=MEAN STDDEV MIN MAX.
+
+** Comparing between lab and online
+
+T-TEST GROUPS=locationnum(0 1)
+  /MISSING=ANALYSIS
+  /VARIABLES=IATD BIATGood BIATBad ExpPref ATB
+  /CRITERIA=CI(.95).
+
+** Correlations between IAT, Good-Focal, Bad-Focal, and Explicit Preference
+
+CORRELATIONS
+  /VARIABLES=IATD BIATGood BIATBad ExpPref
+  /PRINT=TWOTAIL NOSIG
+  /MISSING=PAIRWISE.
+
+** Simultaneous regression predicting IAT from both BIATs
+
+REGRESSION
+  /MISSING LISTWISE
+  /STATISTICS COEFF OUTS R ANOVA
+  /CRITERIA=PIN(.05) POUT(.10)
+  /NOORIGIN 
+  /DEPENDENT IATD
+  /METHOD=ENTER BIATGood BIATBad.
+
+REGRESSION
+  /MISSING LISTWISE
+  /STATISTICS COEFF OUTS R ANOVA
+  /CRITERIA=PIN(.05) POUT(.10)
+  /NOORIGIN 
+  /DEPENDENT ExpPref
+  /METHOD=ENTER BIATGood BIATBad.
+
+REGRESSION
+  /MISSING LISTWISE
+  /STATISTICS COEFF OUTS R ANOVA
+  /CRITERIA=PIN(.05) POUT(.10)
+  /NOORIGIN 
+  /DEPENDENT ATB
+  /METHOD=ENTER BIATGood BIATBad.
+

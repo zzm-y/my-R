@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Data Analysis" />
+  <meta name="dcterms.date" content="2026-05-07" />
+  <title>Psychology文章Raw Dataset查找流程</title>
+  <style>
+html {
+color: #1a1a1a;
+background-color: #fdfdfd;
+}
+body {
+margin: 0 auto;
+max-width: 36em;
+padding-left: 50px;
+padding-right: 50px;
+padding-top: 50px;
+padding-bottom: 50px;
+hyphens: auto;
+overflow-wrap: break-word;
+text-rendering: optimizeLegibility;
+font-kerning: normal;
+}
+@media (max-width: 600px) {
+body {
+font-size: 0.9em;
+padding: 12px;
+}
+h1 {
+font-size: 1.8em;
+}
+}
+@media print {
+html {
+background-color: white;
+}
+body {
+background-color: transparent;
+color: black;
+font-size: 12pt;
+}
+p, h2, h3 {
+orphans: 3;
+widows: 3;
+}
+h2, h3, h4 {
+page-break-after: avoid;
+}
+}
+p {
+margin: 1em 0;
+}
+a {
+color: #1a1a1a;
+}
+a:visited {
+color: #1a1a1a;
+}
+img {
+max-width: 100%;
+}
+svg {
+height: auto;
+max-width: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+margin-top: 1.4em;
+}
+h5, h6 {
+font-size: 1em;
+font-style: italic;
+}
+h6 {
+font-weight: normal;
+}
+ol, ul {
+padding-left: 1.7em;
+margin-top: 1em;
+}
+li > ol, li > ul {
+margin-top: 0;
+}
+blockquote {
+margin: 1em 0 1em 1.7em;
+padding-left: 1em;
+border-left: 2px solid #e6e6e6;
+color: #606060;
+}
+code {
+font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+font-size: 85%;
+margin: 0;
+hyphens: manual;
+}
+pre {
+margin: 1em 0;
+overflow: auto;
+}
+pre code {
+padding: 0;
+overflow: visible;
+overflow-wrap: normal;
+}
+.sourceCode {
+background-color: transparent;
+overflow: visible;
+}
+hr {
+background-color: #1a1a1a;
+border: none;
+height: 1px;
+margin: 1em 0;
+}
+table {
+margin: 1em 0;
+border-collapse: collapse;
+width: 100%;
+overflow-x: auto;
+display: block;
+font-variant-numeric: lining-nums tabular-nums;
+}
+table caption {
+margin-bottom: 0.75em;
+}
+tbody {
+margin-top: 0.5em;
+border-top: 1px solid #1a1a1a;
+border-bottom: 1px solid #1a1a1a;
+}
+th {
+border-top: 1px solid #1a1a1a;
+padding: 0.25em 0.5em 0.25em 0.5em;
+}
+td {
+padding: 0.125em 0.5em 0.25em 0.5em;
+}
+header {
+margin-bottom: 4em;
+text-align: center;
+}
+#TOC li {
+list-style: none;
+}
+#TOC ul {
+padding-left: 1.3em;
+}
+#TOC > ul {
+padding-left: 0;
+}
+#TOC a:not(:hover) {
+text-decoration: none;
+}
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+
+<style id="custom-render-style">
+:root {
+  --bg: #f6f7fb;
+  --panel: #ffffff;
+  --ink: #1f2937;
+  --muted: #6b7280;
+  --line: #e5e7eb;
+  --accent: #314f9f;
+  --code-bg: #f8fafc;
+}
+html { background: var(--bg); color: var(--ink); }
+body {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 40px 24px 64px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+  line-height: 1.72;
+}
+header#title-block-header {
+  background: linear-gradient(135deg, #ffffff 0%, #eef3ff 100%);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 36px 40px;
+  box-shadow: 0 18px 45px rgba(31, 41, 55, 0.08);
+  margin-bottom: 24px;
+}
+h1.title { font-size: 2.35rem; line-height: 1.2; margin: 0 0 12px; color: #111827; }
+.author, .date { color: var(--muted); margin: 4px 0; }
+nav#TOC {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 18px 22px;
+  box-shadow: 0 10px 30px rgba(31, 41, 55, 0.05);
+  margin: 20px 0 34px;
+}
+nav#TOC::before { content: "目录"; display: block; font-weight: 700; margin-bottom: 8px; color: #111827; }
+nav#TOC ul { columns: 2; gap: 28px; margin: 0; }
+nav#TOC li { break-inside: avoid; margin: 4px 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+h2 {
+  margin-top: 42px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  font-size: 1.65rem;
+  color: #111827;
+}
+h2::before { content: ""; display: inline-block; width: 10px; height: 10px; margin-right: 10px; border-radius: 50%; background: var(--accent); vertical-align: middle; }
+strong { color: #111827; }
+table {
+  display: table;
+  width: 100%;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(31, 41, 55, 0.04);
+}
+th { background: #eef2ff; color: #111827; }
+th, td { padding: 10px 12px; border-color: var(--line); }
+pre {
+  background: var(--code-bg);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 16px 18px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+pre code { font-size: 0.92rem; line-height: 1.55; }
+code { background: #eef2ff; padding: 0.12em 0.32em; border-radius: 6px; }
+pre code { background: transparent; padding: 0; }
+hr { border: 0; height: 1px; background: var(--line); margin: 28px 0; }
+ul, ol { padding-left: 1.4em; }
+@media (max-width: 720px) {
+  body { padding: 20px 14px 48px; }
+  header#title-block-header { padding: 26px 22px; border-radius: 18px; }
+  h1.title { font-size: 1.8rem; }
+  nav#TOC ul { columns: 1; }
+  pre { padding: 12px; }
+}
+</style>
+
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Psychology文章Raw Dataset查找流程</h1>
+<p class="author">Data Analysis</p>
+<p class="date">2026-05-07</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#目标" id="toc-目标">目标</a></li>
+<li><a href="#数据文件概览" id="toc-数据文件概览">数据文件概览</a></li>
+<li><a href="#pipeline流程图" id="toc-pipeline流程图">Pipeline流程图</a></li>
+<li><a href="#步骤1筛选psychology文章" id="toc-步骤1筛选psychology文章">步骤1：筛选Psychology文章</a></li>
+<li><a href="#步骤2join-pr_outcomes.csv" id="toc-步骤2join-pr_outcomes.csv">步骤2：Join pr_outcomes.csv</a></li>
+<li><a href="#步骤3检查数据可用性" id="toc-步骤3检查数据可用性">步骤3：检查数据可用性</a></li>
+<li><a href="#步骤4信息不足时回查" id="toc-步骤4信息不足时回查">步骤4：信息不足时回查</a></li>
+<li><a href="#实际案例paper_id-8r9d" id="toc-实际案例paper_id-8r9d">实际案例：paper_id = “8R9d”</a></li>
+<li><a href="#完整pipeline代码" id="toc-完整pipeline代码">完整Pipeline代码</a></li>
+<li><a href="#关键发现" id="toc-关键发现">关键发现</a></li>
+<li><a href="#输出文件" id="toc-输出文件">输出文件</a></li>
+<li><a href="#谢谢" id="toc-谢谢">谢谢！</a></li>
+</ul>
+</nav>
+<h2 id="目标">目标</h2>
+<p><strong>从多个CSV文件中找到psychology领域的文章及其原始数据集</strong></p>
+<ul>
+<li>输入：4个CSV文件</li>
+<li>处理：数据筛选、合并、回查</li>
+<li>输出：有raw dataset可用的psychology文章列表</li>
+</ul>
+<hr />
+<h2 id="数据文件概览">数据文件概览</h2>
+<table>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 34%" />
+<col style="width: 34%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>文件名</th>
+<th>主要内容</th>
+<th>关键字段</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>score_rr-project_status.csv</code></td>
+<td>RR项目状态</td>
+<td><code>paper_id</code>, <code>rr_id</code>, <code>field</code></td>
+</tr>
+<tr class="even">
+<td><code>pr_outcomes.csv</code></td>
+<td>PR结果</td>
+<td><code>paper_id</code>, <code>data_available</code></td>
+</tr>
+<tr class="odd">
+<td><code>orig-material_availability.csv</code></td>
+<td>原始材料可用性</td>
+<td><code>pdf_filename</code>, <code>pr_data_available...11</code></td>
+</tr>
+<tr class="even">
+<td><code>orig-material_author-outreach.csv</code></td>
+<td>作者联系记录</td>
+<td><code>pdf_filename</code>, <code>paper_id</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="pipeline流程图">Pipeline流程图</h2>
+<pre><code>score_rr-project_status.csv
+        │
+        │ filter(field == &quot;psychology&quot;)
+        ▼
+psychology paper_id / rr_id list
+        │
+        │ left_join by paper_id
+        ▼
+pr_outcomes.csv
+        │
+        ├─ data_available
+        ├─ data_location_description
+        ├─ data_notes
+        └─ code_available
+            │
+            ├─ 信息够：直接拿链接
+            └─ 信息不够：回查原始文件</code></pre>
+<hr />
+<h2 id="步骤1筛选psychology文章">步骤1：筛选Psychology文章</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 读取数据</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>rr_status <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;score_rr-project_status.csv&quot;</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 筛选psychology领域</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>psychology_papers <span class="ot">&lt;-</span> rr_status <span class="sc">%&gt;%</span> </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(field <span class="sc">==</span> <span class="st">&quot;psychology&quot;</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看各领域的文章数量</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>field_counts <span class="ot">&lt;-</span> rr_status <span class="sc">%&gt;%</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(field) <span class="sc">%&gt;%</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(count))</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(field_counts, <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;领域&quot;</span>, <span class="st">&quot;文章数&quot;</span>))</span></code></pre></div>
+<p><strong>共140篇psychology文章</strong></p>
+<hr />
+<h2 id="步骤2join-pr_outcomes.csv">步骤2：Join pr_outcomes.csv</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 读取PR结果数据</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>pr_outcomes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;pr_outcomes.csv&quot;</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Left join by paper_id</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>merged_data <span class="ot">&lt;-</span> psychology_papers <span class="sc">%&gt;%</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(pr_outcomes, <span class="at">by =</span> <span class="st">&quot;paper_id&quot;</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看关键字段</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>key_fields <span class="ot">&lt;-</span> merged_data <span class="sc">%&gt;%</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(paper_id, rr_id, data_available, </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>         data_location_description, data_notes) <span class="sc">%&gt;%</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(key_fields, <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Paper ID&quot;</span>, <span class="st">&quot;RR ID&quot;</span>, <span class="st">&quot;数据可用&quot;</span>, </span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>                                 <span class="st">&quot;数据位置描述&quot;</span>, <span class="st">&quot;备注&quot;</span>))</span></code></pre></div>
+<hr />
+<h2 id="步骤3检查数据可用性">步骤3：检查数据可用性</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看有数据可用的文章</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>has_data <span class="ot">&lt;-</span> merged_data <span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(data_available <span class="sc">==</span> <span class="st">&quot;Yes&quot;</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;有raw dataset可用的记录数：&quot;</span>, <span class="fu">nrow</span>(has_data), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;对应的唯一paper_id数：&quot;</span>, <span class="fu">length</span>(<span class="fu">unique</span>(has_data<span class="sc">$</span>paper_id)), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 数据位置分布</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>location_summary <span class="ot">&lt;-</span> merged_data <span class="sc">%&gt;%</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(data_available <span class="sc">==</span> <span class="st">&quot;Yes&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">location_type =</span> <span class="fu">case_when</span>(</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">grepl</span>(<span class="st">&quot;OSF&quot;</span>, data_location_description) <span class="sc">~</span> <span class="st">&quot;OSF平台&quot;</span>,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">grepl</span>(<span class="st">&quot;journal|Science Direct|Wiley|Sage&quot;</span>, data_location_description) <span class="sc">~</span> <span class="st">&quot;期刊网站&quot;</span>,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">grepl</span>(<span class="st">&quot;author|website&quot;</span>, data_location_description) <span class="sc">~</span> <span class="st">&quot;作者网站&quot;</span>,</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">grepl</span>(<span class="st">&quot;GitHub&quot;</span>, data_location_description) <span class="sc">~</span> <span class="st">&quot;GitHub&quot;</span>,</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;其他&quot;</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">%&gt;%</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(location_type) <span class="sc">%&gt;%</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(count))</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(location_summary, <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;数据位置&quot;</span>, <span class="st">&quot;数量&quot;</span>))</span></code></pre></div>
+<hr />
+<h2 id="步骤4信息不足时回查">步骤4：信息不足时回查</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 读取原始材料文件</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>orig_availability <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;orig-material_availability.csv&quot;</span>, </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>orig_outreach <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;orig-material_author-outreach.csv&quot;</span>, </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 示例：查看paper_id &quot;8R9d&quot;的详细信息</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>example_paper <span class="ot">&lt;-</span> <span class="st">&quot;8R9d&quot;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 从pr_outcomes获取信息</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>example_info <span class="ot">&lt;-</span> pr_outcomes <span class="sc">%&gt;%</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(paper_id <span class="sc">==</span> example_paper) <span class="sc">%&gt;%</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(pdf_filename, data_available, data_location_description, </span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>         data_notes, code_available)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(example_info, <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;文件名&quot;</span>, <span class="st">&quot;数据可用&quot;</span>, <span class="st">&quot;数据位置&quot;</span>, </span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">&quot;备注&quot;</span>, <span class="st">&quot;代码可用&quot;</span>))</span></code></pre></div>
+<hr />
+<h2 id="实际案例paper_id-8r9d">实际案例：paper_id = “8R9d”</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 回查orig-material_availability.csv</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>example_pdf <span class="ot">&lt;-</span> <span class="fu">unique</span>(example_info<span class="sc">$</span>pdf_filename)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>orig_info <span class="ot">&lt;-</span> orig_availability <span class="sc">%&gt;%</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(pdf_filename <span class="sc">==</span> example_pdf) <span class="sc">%&gt;%</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(pdf_filename, pr_data_available...<span class="dv">11</span>, pr_data_location_description)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(orig_info, <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;文件名&quot;</span>, <span class="st">&quot;原始数据可用&quot;</span>, <span class="st">&quot;原始数据位置描述&quot;</span>))</span></code></pre></div>
+<p><strong>验证结果</strong>：两个数据源都确认数据可用，位置为OSF平台</p>
+<hr />
+<h2 id="完整pipeline代码">完整Pipeline代码</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 完整的数据处理流程</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> rr_status <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(field <span class="sc">==</span> <span class="st">&quot;psychology&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(pr_outcomes, <span class="at">by =</span> <span class="st">&quot;paper_id&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(data_available <span class="sc">==</span> <span class="st">&quot;Yes&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(orig_availability, <span class="at">by =</span> <span class="st">&quot;pdf_filename&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(orig_outreach, <span class="at">by =</span> <span class="st">&quot;pdf_filename&quot;</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 保存结果</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(result, <span class="st">&quot;psychology_raw_dataset_final.csv&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看摘要</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>summary_result <span class="ot">&lt;-</span> result <span class="sc">%&gt;%</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(data_available) <span class="sc">%&gt;%</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>())</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(summary_result)</span></code></pre></div>
+<hr />
+<h2 id="关键发现">关键发现</h2>
+<ol type="1">
+<li><strong>140篇</strong>
+psychology文章中筛选出<strong>52条</strong>有可用数据的PR记录</li>
+<li>主要托管平台：<strong>OSF</strong> (60%)，其次是期刊官网 (30%)</li>
+<li>数据格式多样：CSV, SAV (SPSS), Excel, R数据文件</li>
+<li>部分数据需要<strong>机构访问权限</strong></li>
+<li>有些只包含<strong>部分实验数据</strong></li>
+</ol>
+<p><strong>建议</strong>：优先使用OSF平台的数据，因其提供永久存储和版本控制</p>
+<hr />
+<h2 id="输出文件">输出文件</h2>
+<ul>
+<li><code>psychology_raw_dataset.csv</code> - 有数据可用的文章列表</li>
+<li><code>psychology_raw_dataset_final.csv</code> -
+完整回查后的数据</li>
+<li><code>psychology_raw_dataset_pipeline.Rmd</code> - 本演示文档</li>
+</ul>
+<p><strong>下一步</strong>： - 访问OSF链接下载原始数据 -
+检查数据完整性和代码可复现性 - 进行元分析或数据整合</p>
+<hr />
+<h2 id="谢谢">谢谢！</h2>
+<p><strong>联系方式</strong>：如需完整代码或数据，请查看工作目录</p>
+<p><code>/Users/sunxinru/Desktop/r语言期末/</code></p>
+</body>
+</html>

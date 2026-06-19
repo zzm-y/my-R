@@ -1,0 +1,14 @@
+<Study id="colin.axtreplicationscore" datagroup="research">
+	<Definitions>
+        <Task id="axtreplicationscore" file="mgr2.js">/common/all/js/quest/0.1/dist/manager.jsp</Task>
+		<Task id="dummy">consent.js</Task>
+	</Definitions>
+
+	<Map>
+		<Task id="axtreplicationscore"/>
+		<Task id="dummy"/>
+	</Map>
+</Study>
+
+
+
